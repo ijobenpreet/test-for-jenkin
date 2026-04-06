@@ -197,3 +197,187 @@ MIT License
 ---
 
 > Made with ❤️ for beginners learning DevOps
+
+---
+
+# 🔔 10. Webhook Setup (GitHub → Jenkins via ngrok)
+
+This section connects **GitHub → Jenkins** using **ngrok public URL** so builds trigger automatically on push 🚀
+
+---
+
+## 🌍 Step 1: Start Services
+
+Start Jenkins:
+
+```bash
+brew services start jenkins-lts
+```
+
+Start ngrok:
+
+```bash
+ngrok http 8080
+```
+
+👉 Copy your ngrok URL:
+
+```
+https://xxxx.ngrok-free.app
+```
+
+---
+
+## ⚙️ Step 2: Configure Jenkins
+
+### 1. Install Required Plugins
+
+Go to:
+
+```
+Jenkins → Manage Jenkins → Plugins
+```
+
+Install:
+
+* GitHub Integration Plugin
+* Git Plugin
+
+---
+
+### 2. Create New Job
+
+1. Click **New Item**
+2. Enter name → Select **Freestyle Project**
+3. Click **OK**
+
+---
+
+### 3. Configure Job
+
+#### Source Code Management:
+
+* Select **Git**
+* Add your repository URL
+
+#### Build Triggers:
+
+✔️ Check:
+
+```
+GitHub hook trigger for GITScm polling
+```
+
+Save the job ✅
+
+---
+
+## 🔗 Step 3: Setup GitHub Webhook
+
+Go to your GitHub repository:
+
+```
+Settings → Webhooks → Add Webhook
+```
+
+### Fill details:
+
+* **Payload URL:**
+
+```
+https://YOUR-NGROK-URL/github-webhook/
+```
+
+* **Content type:**
+
+```
+application/json
+```
+
+* **Events:**
+  ✔️ Just the push event
+
+Click:
+
+```
+Add Webhook
+```
+
+---
+
+## 🧪 Step 4: Test Webhook
+
+Run:
+
+```bash
+git add .
+git commit -m "test webhook"
+git push origin main
+```
+
+---
+
+## 🎉 Expected Result
+
+* GitHub sends webhook → ngrok URL
+* ngrok forwards → Jenkins (localhost:8080)
+* Jenkins job triggers automatically 🚀
+
+---
+
+## 🔍 Debugging Tips
+
+### Check ngrok logs:
+
+```
+http://127.0.0.1:4040
+```
+
+### Check Jenkins logs:
+
+```bash
+tail -f /usr/local/var/log/jenkins/jenkins.log
+```
+
+---
+
+## ⚠️ Common Issues
+
+| Problem                | Solution                           |
+| ---------------------- | ---------------------------------- |
+| 404 error              | Check `/github-webhook/` URL       |
+| Webhook not triggering | Ensure Jenkins job trigger enabled |
+| ngrok URL changed      | Update webhook URL                 |
+| Jenkins not accessible | Restart service                    |
+
+---
+
+## 💡 Pro Tips
+
+* Use branch filtering in Jenkins
+* Add Jenkinsfile for pipelines
+* Secure with GitHub secret token 🔐
+
+---
+
+## 🔐 Optional: Add Webhook Secret
+
+### In GitHub:
+
+* Add secret in webhook settings
+
+### In Jenkins:
+
+* Configure same secret in GitHub plugin
+
+---
+
+## 🚀 Workflow Summary
+
+```
+GitHub Push → Webhook → ngrok → Jenkins → Build Triggered
+```
+
+---
+
+> 💙 Now your CI/CD pipeline is LIVE locally using ngrok!
