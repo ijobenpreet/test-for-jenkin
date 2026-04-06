@@ -170,8 +170,6 @@ http://127.0.0.1:4040
 
 ---
 
-## ⭐ Bonus
-
 * Add Jenkins plugins:
 
   * GitHub Integration
@@ -193,10 +191,6 @@ Feel free to fork and improve this repo 💙
 ## 📄 License
 
 MIT License
-
----
-
-> Made with ❤️ for beginners learning DevOps
 
 ---
 
@@ -317,7 +311,7 @@ git push origin main
 
 ---
 
-## 🎉 Expected Result
+## 🎉  Result
 
 * GitHub sends webhook → ngrok URL
 * ngrok forwards → Jenkins (localhost:8080)
@@ -325,7 +319,7 @@ git push origin main
 
 ---
 
-## 🔍 Debugging Tips
+## 🔍 
 
 ### Check ngrok logs:
 
@@ -360,18 +354,6 @@ tail -f /usr/local/var/log/jenkins/jenkins.log
 
 ---
 
-## 🔐 Optional: Add Webhook Secret
-
-### In GitHub:
-
-* Add secret in webhook settings
-
-### In Jenkins:
-
-* Configure same secret in GitHub plugin
-
----
-
 ## 🚀 Workflow Summary
 
 ```
@@ -380,4 +362,5 @@ GitHub Push → Webhook → ngrok → Jenkins → Build Triggered
 
 ---
 
-> 💙 Now your CI/CD pipeline is LIVE locally using ngrok!
+> Made with ❤️ for beginners learning DevOps
+>  Now your CI/CD pipeline is LIVE locally using ngrok!
